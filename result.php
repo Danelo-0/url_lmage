@@ -36,6 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Если к src нужно добавить hhttps: (добавить регулярку)
         //$src = "https:" . $src;
 
+        if (!preg_match('/^(https?:\/\/)/', $src)) {
+            $src = 'https:' . $src;
+        }
+
         $imageSize = getSizeImg($src);
         if ($imageSize !== false) {
             $imageData[] = ['src' => $src];
