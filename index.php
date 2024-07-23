@@ -14,16 +14,3 @@
    </form>
 </body>
 </html>
-
-<?php
-
-//$filename = "https://809620.selcdn.ru/wallpaperio-net/wallpapers/thumbnails/77994416187d25ac0305ae70e93ab4a6.jpg";
-
-//$size = filesize($filename) / 1024 / 1024;
-
-//$headers = get_headers($filename, 1) ;
-
-//$size = $headers['Content-Length'] / 1024 / 1024;
-
-//echo "<div>{$size}</div>"
- ?>

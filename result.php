@@ -1,20 +1,12 @@
 <?php
 
-error_reporting(0);
+//error_reporting(0);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $url = $_POST['url'];
 
-    /*$options = [
-      "http" => [
-          "header" => "User-Agent:MyAgent/1.0\r\n"
-      ]
-   ];
-
-   $context = stream_context_create($options);*/
-
-   $content = file_get_contents($url);
+    $content = file_get_contents($url);
 
     if ($content === FALSE) {
         echo "Не удалось получить содержимое страницы";
@@ -24,17 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $doc = new DOMDocument();
     $doc->loadHTML($content);
     $images = $doc->getElementsByTagName('img');
-
-    //var_dump($images);
-    
+ 
     $imageData = [];
     $totalSize = 0;
 
     foreach ($images as $img) {
         $src = $img->getAttribute('src');
-        
-        // Если к src нужно добавить hhttps: (добавить регулярку)
-        //$src = "https:" . $src;
 
         if (!preg_match('/^(https?:\/\/)/', $src)) {
             $src = 'https:' . $src;
@@ -56,8 +43,8 @@ function getSizeImg($url)
     if (isset($headers['Content-Length'])) {
         return (int)$headers['Content-Length'];
     }
-
-   return false;  
+    
+    return false;  
 }
 ?>
 
