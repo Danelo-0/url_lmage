@@ -17,10 +17,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $doc->loadHTML($content);
     $images = $doc->getElementsByTagName('img');
  
+    var_dump($images);
     $imageData = [];
     $totalSize = 0;
 
-    foreach ($images as $img) {
+    for ($i=0; $i < count($images); $i++) { 
+
+        $src = $images[$i]->getAttribute('src');
+
+        if (!preg_match('/^(https?:\/\/)/', $src)) {
+            $src = 'https:' . $src;
+        }
+
+        $imageSize = getSizeImg($src);
+        if ($imageSize !== false) {
+            $imageData[] = ['src' => $src];
+            $totalSize += $imageSize;
+        }
+        
+    }
+
+    /*foreach ($images as $img) {
+
         $src = $img->getAttribute('src');
 
         if (!preg_match('/^(https?:\/\/)/', $src)) {
@@ -32,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $imageData[] = ['src' => $src];
             $totalSize += $imageSize;
         }
-    }
+    }*/
 
     $totalSize = $totalSize / (1024 * 1024);
 }
